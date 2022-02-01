@@ -7,7 +7,7 @@ OUTPUTS := $(foreach conf,$(CONFS),$(foreach trace, $(TRACES), outputs/$(trace:t
 OUTPUTS_SOLUTION := $(foreach conf,$(CONFS),$(foreach trace, $(TRACES), outputs_solution/$(trace:traces/%.tr=%).$(conf:confs/%.conf=%).out))
 DIFFS := $(foreach conf,$(CONFS),$(foreach trace, $(TRACES), diffs/$(trace:traces/%.tr=%).$(conf:confs/%.conf=%).diff))
 
-COPT = -g -Wall -I/usr/include/glib-2.0/ -I/usr/lib64/glib-2.0/include/
+COPT = -g -Wall -I/usr/include/glib-2.0/ -I/usr/lib/x86_64-linux-gnu/glib-2.0/include/
 LOPT = -lglib-2.0
 CC = g++
 
@@ -21,13 +21,13 @@ CPU.o: CPU.h config.h trace.h
 trace_reader.o: CPU.h trace.h
 
 five_stage: five_stage.o config.o CPU.o trace.o
-	$(CC) $(LOPT) $^ -o $@
+	$(CC) $^ $(LOPT) -o $@
 
 trace_reader: trace_reader.o config.o CPU.o trace.o
-	$(CC) $(LOPT) $^ -o $@
+	$(CC) $^ $(LOPT) -o $@
 
 trace_generator: trace_generator.o config.o CPU.o trace.o
-	$(CC) $(LOPT) $^ -o $@
+	$(CC) $^ $(LOPT) -o $@
 
 %.o: %.c
 	$(CC) -c $(COPT) $<
@@ -54,3 +54,6 @@ $(foreach trace,$(TRACES),$(foreach conf, $(CONFS), $(eval $(call diff_rules,$(t
 
 clean:
 	rm -f $(TARGETS) $(OBJECTS) $(OUTPUTS) $(DIFFS)
+
+distclean: clean
+	rm -f $(OUTPUTS_SOLUTION)
