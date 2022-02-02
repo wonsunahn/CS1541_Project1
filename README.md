@@ -700,6 +700,7 @@ backed up, as well as allowing your collaborators to access your changes and
 keep up-to-date.  Here are a couple of tutorials on how to Commit and Push:
 
    https://github.com/git-guides/git-commit
+
    https://github.com/git-guides/git-push
 
 3. Whenever there are updates to the Remote Repository (somebody did a "Push"
