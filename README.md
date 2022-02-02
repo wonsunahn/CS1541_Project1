@@ -18,9 +18,13 @@
   * [Source Code](#source-code)
   * [Submission](#submission)
 - [Resources](#resources)
+  * [GitHub Primer](#github-primer)
   
 # CS/COE 1541 - Introduction to Computer Architecture
 Spring Semester 2022 - Project 1
+
+Please accept Project 1 on **GitHub Classroom** using the following link:
+TBD
 
 * DUE: Mar 16 (Wednesday), 2022 4:30 PM 
 
@@ -602,10 +606,106 @@ JRTYPE - a jump register instruction (used for "return" in functions)
 
 ## Submission
 
-The submission will be through GradeScope.  Your submission will be mostly autograded using test cases.  I am still working on the autograder so the submission link is not up yet but most of the test cases will be identical with the traces in the traces/ directory.  So if you see no difference with the solution output, you should be mostly fine.  Please feel free to create traces of your own and compare against the reference five_stage_solution binary.
+Each pairwise group will submit the exercise *once* to GradeScope, by *one
+member* of the group.  The submitting member will press the "View or edit
+group" link at the top-right corner of the assignment page after submission to
+add his/her partner.  That way, both of you will get a grade.  This applies to
+both the Project 1 Source Code and Project 1 Retrospective submissions
+explained below.
 
+You will do two submissions for this deliverable.
+
+1. **(90 points)** Project 1 Soure Code (Due Mar 16, 2022 4:30 PM)
+
+   The easiest way to submit the source code is by submitting your GitHub
+repository.  Add your partner as a collaborator so both of you have access.
+Make sure you keep the repository **PRIVATE** so that nobody else can access
+your repository.  
+
+   Once you are done modifying code, don't forget to commit and push your
+changes to the github repository.  Before you commit your changes, please do
+'make distclean' so that you don't commit your large debug output files with
+your source code.  When you are done, submit your GitHub repository to
+GradeScope at the "Project 1 Soure Code" link.  Once you submit, GradeScope
+will run the autograder to grade you and give you instant feedback.  If you get
+deductions, fix your code based on the feedback and resubmit.  Repeat until you
+don't get deductions.  You will get deductions based on the number of failed
+diffs (-5 per failed diff).  This part of the submission is worth 90 points.
+You start out with 18 failed diffs (out of 32) with no modifications to code,
+so you start out with 90 - 18 * 5 = 0 points.
+    
+   The alternative way to submit your source code is to directly upload the
+files.  All you have to do is drag and drop source files that you have modified
+on to the Upload window and press the Upload button.  The default files in this
+folder will be used for any files that you don't upload.  While this method in
+the short run is simpler than the GitHub method, you will find that using a
+source repository like GitHub is beneficial in the long run.
+    
+1. **(20 points)** Project 1 Retrospective (Due TBD)
+
+   **NOT AVAILABLE YET**
+   
+   Click on the GradeScope "Project 1 Retrospective" link and answer the
+questions based on [Task 3: Analyzing Performance
+Plots](#task-3-analyzing-performance-plots).  Note that this submission is
+worth 20, not 10, points.  That is because 10 points are **extra credit**.  10
+points worth of questions are either multiple choice or fill-in-the-blank
+questions which are easily answerable by simply reading the plot.  10 points
+worth of questions (the extra credit) are short answer questions that ask you
+to explain and make conjectures about the experimental results, and require
+some additional thinking.
+    
+   Just like other scientists, computer architects try to draw conclusions
+from experimental data from their simulators.  Some conclusions are strongly
+supported by the data and other conclusions less so.  In a proper scientific
+publication, architects publish both the raw data and the conclusions they
+derived from it.  It is up to the reader to judge the strength of each
+conclusion based on the data provided.  By doing the extra credit, you will
+practice drawing conclusions from data, just like architects do every day.
+Since this is extra credit, I will expect you to write a reasonable conclusion
+--- something that is not supported by the data and your knowledge of the
+simulator will not get you any points.
+    
 # Resources
 
 * Windows SSH Terminal Client: [Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)
 * File Transfer Client: [FileZilla](https://filezilla-project.org/download.php?type=client)
 * Linux command line tutorial: [The Linux Command Line](http://linuxcommand.org/lc3_learning_the_shell.php)
+* GitHub GUI Client: [GitHub Desktop](https://desktop.github.com/)
+
+## GitHub Primer
+
+Accepting the GitHub Classroom assignment should have created a GitHub
+repository for your group.  Git is one of the most popular source versioning
+and collaboration tools used in industry and GitHub is a major provider of that
+service.  By using Git, your project doesn't evaporate if you spill coffee on
+your laptop.  Also, it allows you and your partner to work on the same source
+code without stepping on each other's toes by maintaining a central repository.  
+
+
+1. You need a clone of the Remote Repository on GitHub on your machine to start
+   working on it.  Here is a short tutorial on how to clone repositories:
+
+   https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository
+
+2. Whenever you make improvements to your source code, frequently "Commit" and
+   "Push" those changes to GitHub so that your new changes are versioned.
+Committing your changes will transfer the changes from the source code that you
+are working on to the Local Repository creating a new version.  Pushing your
+changes will upload new versions in your Local Repository to the central Remote
+Repository at GitHub.com.  So only after you Push will the changes be available
+to your collaborator to Pull (or yourself from a different machine).
+Committing and Pushing frequently ensures that your changes are versioned and
+backed up, as well as allowing your collaborators to access your changes and
+keep up-to-date.  Here are a couple of tutorials on how to Commit and Push:
+
+   https://github.com/git-guides/git-commit
+   https://github.com/git-guides/git-push
+
+3. Whenever there are updates to the Remote Repository (somebody did a "Push"
+   to the repository), you need to "Pull" the changes to your Local Repository.
+Before you start modifying the code make it a habit to Pull to make sure your
+Local Repository in sync with the Remote Repository at GitHub.com.  Also,
+whenever you Push, notify your group members so that they can Pull.  Here is a short tutorial on how to Pull:
+
+   https://github.com/git-guides/git-pull
