@@ -107,6 +107,9 @@ In order to build the project and run the simulations, you only need to do 'make
 ```
 make
 ```
+
+The output should look like:
+
 ```
 g++ -c -g -Wall -I/usr/include/glib-2.0/ -I/usr/lib64/glib-2.0/include/ five_stage.c
 g++ -c -g -Wall -I/usr/include/glib-2.0/ -I/usr/lib64/glib-2.0/include/ config.c
@@ -115,9 +118,21 @@ g++ -c -g -Wall -I/usr/include/glib-2.0/ -I/usr/lib64/glib-2.0/include/ trace.c
 ...
 ```
 
-If successful, it will produce the binaries: five_stage, trace_generator, and trace_reader as well as results of the simulation using all combinations of 4 configuration files and 8 trace files.  A configuration file represents a processor design and a trace file contain instructions from a micro-benchmark, so you will be in effect simulating 4 processor designs on a benchmark suite.  You can generate your own traces using the trace_generator and put it inside the traces/ directory or create a new configuration inside the confs/ directory, and they will be incorporated into the results automatically by the Makefile script.  The results are stored in the outputs/ directory and also side-by-side diffs with the outputs_solution/ directory are generated and stored in the diffs/ directory.  When you debug the program, you will find these side-by-side diffs useful.
+If successful, it will produce the binaries: five_stage, trace_generator, and
+trace_reader as well as results of the simulation using all combinations of 4
+configuration files and 8 trace files.  A configuration file represents a
+processor design and a trace file contain instructions from a micro-benchmark,
+so you will be in effect simulating 4 processor designs on a benchmark suite.
+You can generate your own traces using the trace_generator and put it inside
+the traces/ directory or create a new configuration inside the confs/
+directory, and they will be incorporated into the results automatically by the
+Makefile script.  The results are stored in the outputs/ directory and also
+side-by-side diffs with the outputs_solution/ directory are generated and
+stored in the diffs/ directory.  When you debug the program, you will find
+these side-by-side diffs useful.
 
-If you only wish to build your C files and not run the simulations, just do 'make build' to invoked the 'build' target in the 'Makefile' script:
+If you only wish to build your C files and not run the simulations, just do
+'make build' to invoked the 'build' target in the 'Makefile' script:
 
 ```
 make build
@@ -132,6 +147,9 @@ You are given a program, five_stage.c, which reads a trace file (a binary file c
 ```
 ./five_stage -t traces/sample.tr -c confs/2-wide.conf
 ```
+
+The output should look like:
+
 ```
 + Number of cycles : 804
 + IPC (Instructions Per Cycle) : 1.2438
@@ -143,6 +161,11 @@ If the -v (verbose) option is given on the commandline, instructions that enter 
 
 ```
 ./five_stage -t traces/sample.tr -c confs/2-wide.conf -v
+```
+
+The output should look like:
+
+```
 [1: WB]     NOP: (Seq:        0)(Regs:   0,   0,   0)(Addr: 0)(PC: 0)
 [1: WB]     NOP: (Seq:        0)(Regs:   0,   0,   0)(Addr: 0)(PC: 0)
 [1: IF]    LOAD: (Seq:        1)(Regs:  16,  29, 255)(Addr: 2147450880)(PC: 2097312)
@@ -183,7 +206,7 @@ Or, you can run with the -d option yourself:
 ./five_stage -t traces/sample.tr -c confs/2-wide.conf -d
 ```
 
-And you should see the following output:
+The output should look like:
 
 ```
 [CYCLE NUMBER: 1]
@@ -401,8 +424,11 @@ Our five_stage simulator at its current state does not deal with hazards and hen
 I have already handled one structural hazard for you: the one on EX units when two instructions in the ID stage need to be issued to the same EX unit.  The solution was to stall and have the later instruction wait one cycle before issuing.  And these stalls single-handedly brought down the IPC of the 2-wide processor from 2 to 1.2438!
 
 ```
-grep IPC outputs/sample.2-wide\*
+grep IPC outputs/sample.2-wide*
 ```
+
+The output should look like:
+
 ```
 outputs/sample.2-wide-opt.out:+ IPC (Instructions Per Cycle) : 1.2438
 outputs/sample.2-wide.out:+ IPC (Instructions Per Cycle) : 1.2438
