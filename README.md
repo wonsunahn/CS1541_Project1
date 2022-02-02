@@ -6,6 +6,7 @@
   * [Environment Setup](#environment-setup)
   * [Directory Structure and Makefile Script](#directory-structure-and-makefile-script)
   * [Program Output](#program-output)
+  * [Creating Performance Plots](#creating-performance-plots)
 - [Configuration Files and Trace Files](#configuration-files-and-trace-files)
   * [Configuration Files](#configuration-files)
   * [Trace Files](#trace-files)
@@ -19,7 +20,8 @@
   * [Submission](#submission)
 - [Resources](#resources)
   * [GitHub Primer](#github-primer)
-  
+  * [Debugging C](#debugging-c)
+
 # CS/COE 1541 - Introduction to Computer Architecture
 Spring Semester 2022 - Project 1
 
@@ -669,9 +671,11 @@ simulator will not get you any points.
 # Resources
 
 * Windows SSH Terminal Client: [Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)
+* GitHub GUI Client: [GitHub Desktop](https://desktop.github.com/)
 * File Transfer Client: [FileZilla](https://filezilla-project.org/download.php?type=client)
 * Linux command line tutorial: [The Linux Command Line](http://linuxcommand.org/lc3_learning_the_shell.php)
-* GitHub GUI Client: [GitHub Desktop](https://desktop.github.com/)
+* Valgrind tutorial: [Valgrind tutorial](https://valgrind.org/docs/manual/QuickStart.html)
+* GDB tutorial: [GDB tutorial](https://sourceware.org/gdb/current/onlinedocs/gdb/)
 
 ## GitHub Primer
 
@@ -710,3 +714,12 @@ Local Repository in sync with the Remote Repository at GitHub.com.  Also,
 whenever you Push, notify your group members so that they can Pull.  Here is a short tutorial on how to Pull:
 
    https://github.com/git-guides/git-pull
+
+## Debugging C
+
+You can use all the tools that you learned in CS 449 to debug your simulator,
+including GDB (the GNU Debugger) and Valgrind.  Here are couple of tutorials to
+jog your memory:
+
+* Valgrind tutorial: [Valgrind tutorial](https://valgrind.org/docs/manual/QuickStart.html)
+* GDB tutorial: [GDB tutorial](https://sourceware.org/gdb/current/onlinedocs/gdb/)
