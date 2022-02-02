@@ -95,13 +95,13 @@ Here is an overview of the directory structure:
 * config.c / config.h : Functions used to parse and read in the processor configuration file.
 * **CPU.c / CPU.h** : Implements the five stages of the processor pipeline.  The code you will be **modifying**.
 * five_stage.c : Main function. Parses commandline arguments and invokes the five stages in CPU.c at every clock cycle.
-* trace.c / trace.h : Functions to read and write the trace file.
-* trace_generator.c : Utility program to generate a trace file of your own.
-* trace_reader.c : Utility program to read and print out the contents of a trace file in human readable format.
-* Makefile : The build script for the Make tool.
 * **five_stage_solution** : **Reference solution binary** for the project.
 * generate_plot.plt : GNUPlot script to generate the plot PDF file from the data.
 * generate_plot.py: Python script to extrace performance data from results in tabular form.
+* Makefile : The build script for the Make tool.
+* trace.c / trace.h : Functions to read and write the trace file.
+* trace_generator.c : Utility program to generate a trace file of your own.
+* trace_reader.c : Utility program to read and print out the contents of a trace file in human readable format.
 * confs/ : Directory where processor configuration files are.
 * **diffs/** : Directory where **differences** between outputs/ and outputs_solution/ are stored.
 * outputs/ : Directory where outputs after running five_stage are stored.
