@@ -94,7 +94,7 @@ Here is an overview of the directory structure:
 
 * config.c / config.h : Functions used to parse and read in the processor configuration file.
 * **CPU.c / CPU.h** : Implements the five stages of the processor pipeline.  The code you will be **modifying**.
-* five_stage.c : Main function. Parses commandline arguments and invokes the five stages in CPU.c at every clock cycle.
+* **five_stage.c** : **Main function**. Invokes the five stages in CPU.c at every clock cycle.
 * **five_stage_solution** : **Reference solution binary** for the project.
 * generate_plot.plt : GNUPlot script to generate the plot PDF file from the data.
 * generate_plot.py: Python script to extrace performance data from results in tabular form.
