@@ -20,9 +20,9 @@
 - [Resources](#resources)
   
 # CS/COE 1541 - Introduction to Computer Architecture
-Fall Semester 2020 - Project 1
+Spring Semester 2022 - Project 1
 
-* DUE: Oct 13 (Tuesday), 2020 5:00 PM 
+* DUE: Mar 16 (Wednesday), 2022 4:30 PM 
 
 # Introduction
 
@@ -56,32 +56,31 @@ An **in-order** processor issues instructions strictly in program order.  Thus, 
 
 ## Environment Setup
 
-The project is setup to run with the g++ compiler (GNU C++ compiler) and a Make build system.  This system is already in place on the departmental Linux machines (linux.cs.pitt.edu).  If you have a similar setup on your local computer, please feel free to use your machine for development.  Otherwise, you need log in to linux.cs.pitt.edu which may involve some setup.  Here are the steps you need to take:
+The project is setup to run with the g++ compiler (GNU C++ compiler) and a Make build system.  This system is already in place on the departmental thoth machine (thoth.cs.pitt.edu).  If you have a similar setup on your local computer, please feel free to use your machine for development.  Otherwise, you need to log in to thoth.cs.pitt.edu which may involve some setup.  Here are the steps you need to take:
 
-1. If you haven't already, install Pulse VPN Desktop Client.  Instructions on how to download and use:
-https://www.technology.pitt.edu/services/pittnet-vpn-pulse-secure
-Then, set up the VPN client and connect to Pitt VPN  as follows:
-https://www.technology.pitt.edu/help-desk/how-to-documents/pittnet-vpn-pulse-secure-connect-pulse-secure-client
-
-2. Most OSes (Windows, MacOS, Linux) comes with built-in SSH clients accessible using this simple command on your commandline shell:
+1. Most OSes (Windows, MacOS, Linux) comes with built-in SSH clients accessible using this simple command on your commandline shell:
    ```
-   ssh USERNAME@linux.cs.pitt.edu
+   ssh USERNAME@thoth.cs.pitt.edu
    ```
    If you want a more fancy SSH client, you can download Putty, a free open source terminal:
    https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html
-   Connect to "linux.cs.pitt.edu" by typing that in the "Host Name" box.  Make sure that port is 22 and SSH is selected in the radio button options.
+   Connect to "thoth.cs.pitt.edu" by typing that in the "Host Name" box.  Make sure that port is 22 and SSH is selected in the radio button options.
 
-3. Once connected, the host will ask for your Pitt SSO credentials.  Enter your ID and password.
+2. Once connected, the host will ask for your Pitt SSO credentials.  Enter your password.
 
-4. Once logged in, check your quota by typing "fs lq":
+3. Create and go to a directory of your choice (or you can stay at your default
+   home directory) and then clone your GitHub Classroom repository:
+
    ```
-   $ fs lq
-   Volume Name                    Quota       Used %Used   Partition
-   u.wahn                       2547712    1543899   61%         85%
+   git clone <your GitHub Classroom repository HTTPS URL>
    ```
-   This shows your quota in KBs.  The above shows 2.5 GBs.  This project will require at least 50 MBs of disk space.  If you don't have that much remaining please contact my.pitt.edu to increase it.  By default, students are given a paltry 5 MBs of space so it is likely that you don't have the space.  I have been told that you can be given up to 2 GBs of space if you ask for it.  The fastest way to contact my.pitt.edu is through the **live chat** on the website.  It should just take a minute or two.
 
-The project files are within the directory /afs/cs.pitt.edu/courses/1541/project1 once you are logged in to linux.cs.pitt.edu.  Identical files are also on this GitHub folder.  Copy the project files to a working directory of your choice and cd into that directory.
+   This will ask for your Username and Password.  Username is your GitHub
+account username, but Password is not your password.  Password authentication
+on GitHub has been deprecated on August 2021, so now you have to use something
+called a Personal Authenication Token (PAT) in place of the password.  Here are
+instructions on how to create a PAT:
+https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token
 
 ## Directory Structure and Makefile Script
 
@@ -106,7 +105,9 @@ traces/ : Directory where instruction trace files used for simulation are stored
 In order to build the project and run the simulations, you only need to do 'make' to invoke the 'Makefile' script:
 
 ```
-$ make
+make
+```
+```
 g++ -c -g -Wall -I/usr/include/glib-2.0/ -I/usr/lib64/glib-2.0/include/ five_stage.c
 g++ -c -g -Wall -I/usr/include/glib-2.0/ -I/usr/lib64/glib-2.0/include/ config.c
 g++ -c -g -Wall -I/usr/include/glib-2.0/ -I/usr/lib64/glib-2.0/include/ CPU.c
@@ -119,7 +120,7 @@ If successful, it will produce the binaries: five_stage, trace_generator, and tr
 If you only wish to build your C files and not run the simulations, just do 'make build' to invoked the 'build' target in the 'Makefile' script:
 
 ```
-$ make build
+make build
 ```
 
 Optionally, you can also run your simulator on more sizable benchmarks.  I have 4 short and 2 long trace files (sample1.tr, sample2.tr, sample3.tr, sample4.tr) and (sample_large1.tr, sample_large2.tr). These files are accessible at /afs/cs.pitt.edu/courses/1541/long_traces and /afs/cs.pitt.edu/courses/1541/short_traces. But these are not incorporated into the Makefile script because they take significantly longer to run.  When you do run these on five_stage, I recommend you do not have the -v (verbose) or -d (debug) flags on or the simulations will take too long and the output may overflow your disk space.
@@ -129,7 +130,9 @@ Optionally, you can also run your simulator on more sizable benchmarks.  I have 
 You are given a program, five_stage.c, which reads a trace file (a binary file containing a sequence of executed instructions) and simulates a 5 stage pipeline ignoring any control and data hazards. It outputs the total number of cycles needed to execute the instructions in the trace file and, also calculates the IPC (Instructions Per Cycle):
 
 ```
-$ ./five_stage -t traces/sample.tr -c confs/2-wide.conf
+./five_stage -t traces/sample.tr -c confs/2-wide.conf
+```
+```
 + Number of cycles : 804
 + IPC (Instructions Per Cycle) : 1.2438
 ```
@@ -171,13 +174,13 @@ The format of one line in the printout is as follows.  For example, let's take t
 If the -d (debug) option is given on the commandline, the internal state of pipeline stages is printed at every clock cyle, which can be useful for debugging your simulator.  The -v option is implied by the -d option.  The Makefile script uses the -d option to generate outputs.  You can open the generated output file after building:
 
 ```
-$ nano outputs/sample.2-wide.out
+nano outputs/sample.2-wide.out
 ```
 
 Or, you can run with the -d option yourself:
 
 ```
-$ ./five_stage -t traces/sample.tr -c confs/2-wide.conf -d
+./five_stage -t traces/sample.tr -c confs/2-wide.conf -d
 ```
 
 And you should see the following output:
@@ -189,22 +192,27 @@ And you should see the following output:
 [1: IF]    LOAD: (Seq:        1)(Regs:  16,  29, 255)(Addr: 2147450880)(PC: 2097312)
 [1: IF]   ITYPE: (Seq:        2)(Regs:  28, 255, 255)(Addr: 4097)(PC: 2097316)
 =================================================================================
-                                       Cycle: -4  -3  -2  -1   0   1   2   3   4
-    NOP: (Seq:        0)(Regs:   0,   0,   0) IF  ID  EX MEM  WB
-    NOP: (Seq:        0)(Regs:   0,   0,   0) IF  ID  EX MEM  WB
-    NOP: (Seq:        0)(Regs:   0,   0,   0)     IF  ID  EX MEM  WB
-    NOP: (Seq:        0)(Regs:   0,   0,   0)     IF  ID  EX MEM  WB
-    NOP: (Seq:        0)(Regs:   0,   0,   0)         IF  ID  EX MEM  WB
-    NOP: (Seq:        0)(Regs:   0,   0,   0)         IF  ID  EX MEM  WB
-    NOP: (Seq:        0)(Regs:   0,   0,   0)             IF  ID  EX MEM  WB
-    NOP: (Seq:        0)(Regs:   0,   0,   0)             IF  ID  EX MEM  WB
-   LOAD: (Seq:        1)(Regs:  16,  29, 255)                 IF  ID  EX MEM  WB
-  ITYPE: (Seq:        2)(Regs:  28, 255, 255)                 IF  ID  EX MEM  WB
+                                              Pipeline Stage
+    NOP: (Seq:        0)(Regs:   0,   0,   0) WB
+    NOP: (Seq:        0)(Regs:   0,   0,   0) WB
+    NOP: (Seq:        0)(Regs:   0,   0,   0) MEM_ALU
+    NOP: (Seq:        0)(Regs:   0,   0,   0) MEM_lwsw
+    NOP: (Seq:        0)(Regs:   0,   0,   0) EX_ALU
+    NOP: (Seq:        0)(Regs:   0,   0,   0) EX_lwsw
+    NOP: (Seq:        0)(Regs:   0,   0,   0) ID
+    NOP: (Seq:        0)(Regs:   0,   0,   0) ID
+   LOAD: (Seq:        1)(Regs:  16,  29, 255) IF
+  ITYPE: (Seq:        2)(Regs:  28, 255, 255) IF
 =================================================================================
 ...
 ```
 
-At each clock cycle, the timeline of the pipeline at cycles -4, -3, -2, -1, 0, 1, 2, 3, 4 are given.  Cycle "0" refers to the current clock cycle.  If you see [CYCLE NUMBER: 1] on the above printout, you will see that at cycle "0" instructions LOAD and ITYPE are at the IF stage because they have just been fetched.  Remember that this is a 2-wide processor so we are able to process two instructions per cycle.
+This shows the contents of the 2-wide processor at [CYCLE NUMBER: 1] in between
+the ========== marks.  Instructions LOAD and ITYPE are at the IF stage because
+they have just been fetched.  This is a 2-wide processor so we are able to
+process two instructions per cycle.  The top 4 rows show the two instructions
+that have just retired (the WB stage) and two instructions that have just been
+fetched (the IF stage) in more detail.
 
 ```
 ...
@@ -214,22 +222,23 @@ At each clock cycle, the timeline of the pipeline at cycles -4, -3, -2, -1, 0, 1
 [2: IF]   ITYPE: (Seq:        3)(Regs:  28,  28, 255)(Addr: -16384)(PC: 2097320)
 [2: IF]   ITYPE: (Seq:        4)(Regs:  17,  29, 255)(Addr: 4)(PC: 2097324)
 =================================================================================
-                                       Cycle: -4  -3  -2  -1   0   1   2   3   4
-    NOP: (Seq:        0)(Regs:   0,   0,   0) IF  ID  EX MEM  WB
-    NOP: (Seq:        0)(Regs:   0,   0,   0) IF  ID  EX MEM  WB
-    NOP: (Seq:        0)(Regs:   0,   0,   0)     IF  ID  EX MEM  WB
-    NOP: (Seq:        0)(Regs:   0,   0,   0)     IF  ID  EX MEM  WB
-    NOP: (Seq:        0)(Regs:   0,   0,   0)         IF  ID  EX MEM  WB
-    NOP: (Seq:        0)(Regs:   0,   0,   0)         IF  ID  EX MEM  WB
-   LOAD: (Seq:        1)(Regs:  16,  29, 255)             IF  ID  EX MEM  WB
-  ITYPE: (Seq:        2)(Regs:  28, 255, 255)             IF  ID  EX MEM  WB
-  ITYPE: (Seq:        3)(Regs:  28,  28, 255)                 IF  ID  EX MEM  WB
-  ITYPE: (Seq:        4)(Regs:  17,  29, 255)                 IF  ID  EX MEM  WB
+                                              Pipeline Stage
+    NOP: (Seq:        0)(Regs:   0,   0,   0) WB
+    NOP: (Seq:        0)(Regs:   0,   0,   0) WB
+    NOP: (Seq:        0)(Regs:   0,   0,   0) MEM_ALU
+    NOP: (Seq:        0)(Regs:   0,   0,   0) MEM_lwsw
+    NOP: (Seq:        0)(Regs:   0,   0,   0) EX_ALU
+    NOP: (Seq:        0)(Regs:   0,   0,   0) EX_lwsw
+   LOAD: (Seq:        1)(Regs:  16,  29, 255) ID
+  ITYPE: (Seq:        2)(Regs:  28, 255, 255) ID
+  ITYPE: (Seq:        3)(Regs:  28,  28, 255) IF
+  ITYPE: (Seq:        4)(Regs:  17,  29, 255) IF
 =================================================================================
 ...
 ```
 
-At [CYCLE NUMBER: 2], the LOAD and ITYPE instructions are now at the ID stage (at cycle "0").  At cycle "-1" (relative to the current cycle), the instructions were at the IF stage.  At cycle "1", they will be at the EX stage.
+At [CYCLE NUMBER: 2], the original LOAD and ITYPE instructions are now at the
+ID stage.  Two new ITYPE instructions have been fetched at the IF stage.
 
 ```
 ...
@@ -239,22 +248,27 @@ At [CYCLE NUMBER: 2], the LOAD and ITYPE instructions are now at the ID stage (a
 [3: IF]   ITYPE: (Seq:        5)(Regs:   3,  17, 255)(Addr: 4)(PC: 2097328)
 [3: IF]   ITYPE: (Seq:        6)(Regs:   2, 255,  16)(Addr: 2)(PC: 2097332)
 =================================================================================
-                                       Cycle: -4  -3  -2  -1   0   1   2   3   4
-    NOP: (Seq:        0)(Regs:   0,   0,   0) IF  ID  EX MEM  WB
-    NOP: (Seq:        0)(Regs:   0,   0,   0) IF  ID  EX MEM  WB
-    NOP: (Seq:        0)(Regs:   0,   0,   0)     IF  ID  EX MEM  WB
-    NOP: (Seq:        0)(Regs:   0,   0,   0)     IF  ID  EX MEM  WB
-  ITYPE: (Seq:        2)(Regs:  28, 255, 255)         IF  ID  EX MEM  WB
-   LOAD: (Seq:        1)(Regs:  16,  29, 255)         IF  ID  EX MEM  WB
-  ITYPE: (Seq:        3)(Regs:  28,  28, 255)             IF  ID  EX MEM  WB
-  ITYPE: (Seq:        4)(Regs:  17,  29, 255)             IF  ID  EX MEM  WB
-  ITYPE: (Seq:        5)(Regs:   3,  17, 255)                 IF  ID  EX MEM  WB
-  ITYPE: (Seq:        6)(Regs:   2, 255,  16)                 IF  ID  EX MEM  WB
+                                              Pipeline Stage
+    NOP: (Seq:        0)(Regs:   0,   0,   0) WB
+    NOP: (Seq:        0)(Regs:   0,   0,   0) WB
+    NOP: (Seq:        0)(Regs:   0,   0,   0) MEM_ALU
+    NOP: (Seq:        0)(Regs:   0,   0,   0) MEM_lwsw
+  ITYPE: (Seq:        2)(Regs:  28, 255, 255) EX_ALU
+   LOAD: (Seq:        1)(Regs:  16,  29, 255) EX_lwsw
+  ITYPE: (Seq:        3)(Regs:  28,  28, 255) ID
+  ITYPE: (Seq:        4)(Regs:  17,  29, 255) ID
+  ITYPE: (Seq:        5)(Regs:   3,  17, 255) IF
+  ITYPE: (Seq:        6)(Regs:   2, 255,  16) IF
 =================================================================================
 ...
 ```
 
-At [CYCLE NUMBER: 3], you will see that the order of LOAD and ITYPE has been flipped to ITYPE and LOAD.  This is not a change in the ordering in any sense.  For the EX stage, the top row refers to the ALU/Branch EX unit and the bottom row refers to the lw/sw EX unit.  Since ITYPE belongs to the former and LOAD belongs to the latter, that's why the ordering changed.  The same applies to the MEM stage.
+At [CYCLE NUMBER: 3], you will see that the order of LOAD and ITYPE has been
+flipped to ITYPE and LOAD.  This is not a change in the ordering in any sense.
+For the EX stage, the top row refers to the ALU/Branch EX unit and the bottom
+row refers to the lw/sw EX unit.  Since ITYPE belongs to the former and LOAD
+belongs to the latter, that's why the ordering changed.  The same applies to
+the MEM stage.
 
 ```
 ...
@@ -263,29 +277,39 @@ At [CYCLE NUMBER: 3], you will see that the order of LOAD and ITYPE has been fli
 [4: WB]     NOP: (Seq:        0)(Regs:   0,   0,   0)(Addr: 0)(PC: 0)
 [4: IF]   RTYPE: (Seq:        7)(Regs:   3,   3,   2)(Addr: 0)(PC: 2097336)
 =================================================================================
-                                       Cycle: -4  -3  -2  -1   0   1   2   3   4
-    NOP: (Seq:        0)(Regs:   0,   0,   0) IF  ID  EX MEM  WB
-    NOP: (Seq:        0)(Regs:   0,   0,   0) IF  ID  EX MEM  WB
-  ITYPE: (Seq:        2)(Regs:  28, 255, 255)     IF  ID  EX MEM  WB
-   LOAD: (Seq:        1)(Regs:  16,  29, 255)     IF  ID  EX MEM  WB
-  ITYPE: (Seq:        3)(Regs:  28,  28, 255)         IF  ID  EX MEM  WB
-    NOP: (Seq:        0)(Regs:   0,   0,   0)         IF  ID  EX MEM  WB
-  ITYPE: (Seq:        4)(Regs:  17,  29, 255)             IF  ID  EX MEM  WB
-  ITYPE: (Seq:        5)(Regs:   3,  17, 255)             IF  ID  EX MEM  WB
-  ITYPE: (Seq:        6)(Regs:   2, 255,  16)                 IF  ID  EX MEM  WB
-  RTYPE: (Seq:        7)(Regs:   3,   3,   2)                 IF  ID  EX MEM  WB
+                                              Pipeline Stage
+    NOP: (Seq:        0)(Regs:   0,   0,   0) WB
+    NOP: (Seq:        0)(Regs:   0,   0,   0) WB
+  ITYPE: (Seq:        2)(Regs:  28, 255, 255) MEM_ALU
+   LOAD: (Seq:        1)(Regs:  16,  29, 255) MEM_lwsw
+  ITYPE: (Seq:        3)(Regs:  28,  28, 255) EX_ALU
+    NOP: (Seq:        0)(Regs:   0,   0,   0) EX_lwsw
+  ITYPE: (Seq:        4)(Regs:  17,  29, 255) ID
+  ITYPE: (Seq:        5)(Regs:   3,  17, 255) ID
+  ITYPE: (Seq:        6)(Regs:   2, 255,  16) IF
+  RTYPE: (Seq:        7)(Regs:   3,   3,   2) IF
 =================================================================================
 ...
 ```
 
-At [CYCLE NUMBER: 4], we see our first bubble.  This is due to a structural hazard on the ALU/Branch EX unit.  There were two ITYPE instructions ready to issue in the ID stage at the previous cycle, but since there is only one ALU/Branch EX unit, only one could issue.  The lw/sw EX unit is filled with a NOP bubble.
+At [CYCLE NUMBER: 4], we see our first bubble.  This is due to a structural
+hazard on the ALU/Branch EX unit.  There were two ITYPE instructions ready to
+issue in the ID stage at the previous cycle, but since there is only one
+ALU/Branch EX unit, only one could issue.  The lw/sw EX unit is filled with a
+NOP bubble.
 
-In this way, you can analyze the output to make sure that various pipeline hazards are handled properly and also your optimizations work properly.  Again, there is a set of reference outputs under the outputs_solution/ directory and diffs in the diffs/ directory that you can also analyze to figure out what you did wrong.
+In this way, you can analyze the output to make sure that various pipeline
+hazards are handled properly and also your optimizations work properly.  Again,
+there is a set of reference outputs under the outputs_solution/ directory and
+diffs in the diffs/ directory that you can also analyze to figure out what you
+did wrong.
 
-Now, the simulator can also be run with a 1-wide processor configuration (see next section [Configuration Files](#configuration-files)).  Let's take a brief look at the output for that configuration:
+Now, the simulator can also be run with a 1-wide processor configuration (see
+next section [Configuration Files](#configuration-files)).  Let's take a brief
+look at the output for that configuration:
 
 ```
-$ nano outputs/sample.1-wide.out
+nano outputs/sample.1-wide.out
 ```
 
 You will see the following:
@@ -296,17 +320,20 @@ You will see the following:
 [1: WB]     NOP: (Seq:        0)(Regs:   0,   0,   0)(Addr: 0)(PC: 0)
 [1: IF]    LOAD: (Seq:        1)(Regs:  16,  29, 255)(Addr: 2147450880)(PC: 2097312)
 =================================================================================
-                                       Cycle: -4  -3  -2  -1   0   1   2   3   4
-    NOP: (Seq:        0)(Regs:   0,   0,   0) IF  ID  EX MEM  WB
-    NOP: (Seq:        0)(Regs:   0,   0,   0)     IF  ID  EX MEM  WB
-    NOP: (Seq:        0)(Regs:   0,   0,   0)         IF  ID  EX MEM  WB
-    NOP: (Seq:        0)(Regs:   0,   0,   0)             IF  ID  EX MEM  WB
-   LOAD: (Seq:        1)(Regs:  16,  29, 255)                 IF  ID  EX MEM  WB
+                                              Pipeline Stage
+    NOP: (Seq:        0)(Regs:   0,   0,   0) WB
+    NOP: (Seq:        0)(Regs:   0,   0,   0) MEM
+    NOP: (Seq:        0)(Regs:   0,   0,   0) EX
+    NOP: (Seq:        0)(Regs:   0,   0,   0) ID
+   LOAD: (Seq:        1)(Regs:  16,  29, 255) IF
 =================================================================================
 ...
 ```
 
-Since the processor is now 1-wide, there is only each of IF, ID, EX, MEM, and WB stages per cycle.  The EX stage may be the ALU/Branch EX unit or the lw/sw EX unit depending upon the instruction type.  Since only one of either can be active at a time, only one is shown.
+Since the processor is now 1-wide, there is only each of IF, ID, EX, MEM, and
+WB stages per cycle.  The EX stage may be the ALU/Branch EX unit or the lw/sw
+EX unit depending upon the instruction type.  Since only one of either can be
+active at a time, only one is shown.
 
 # Configuration Files and Trace Files
 
@@ -374,9 +401,9 @@ Our five_stage simulator at its current state does not deal with hazards and hen
 I have already handled one structural hazard for you: the one on EX units when two instructions in the ID stage need to be issued to the same EX unit.  The solution was to stall and have the later instruction wait one cycle before issuing.  And these stalls single-handedly brought down the IPC of the 2-wide processor from 2 to 1.2438!
 
 ```
-$ make
-...
-$ grep IPC outputs/sample.2-wide*
+grep IPC outputs/sample.2-wide\*
+```
+```
 outputs/sample.2-wide-opt.out:+ IPC (Instructions Per Cycle) : 1.2438
 outputs/sample.2-wide.out:+ IPC (Instructions Per Cycle) : 1.2438
 ```
