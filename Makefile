@@ -85,7 +85,7 @@ IPC_solution.dat: $(PLOT_OUTPUTS_SOLUTION)
 
 
 clean:
-	rm -f $(TARGETS) $(OBJECTS) $(OUTPUTS) $(PLOT_OUTPUTS) $(DIFFS) *.pdf *.dat
+	rm -f $(TARGETS) $(OBJECTS) $(OUTPUTS) $(PLOT_OUTPUTS) $(DIFFS) IPC.pdf IPC.dat
 
 distclean: clean
 	rm -f $(OUTPUTS_SOLUTION) $(PLOT_OUTPUTS_SOLUTION)
