@@ -1,4 +1,4 @@
-- [CS/COE 1541 - Introduction to Computer Architecture](#cs-coe-1541---introduction-to-computer-architecture)
+- [CS 1541 - Introduction to Computer Architecture](#cs-1541---introduction-to-computer-architecture)
 - [Introduction](#introduction)
   * [Description](#description)
   * [Processor Design](#processor-design)
@@ -16,29 +16,29 @@
     + [Data hazards](#data-hazards)
     + [Control hazards](#control-hazards)
   * [Task 2: Enabling Optimizations on the Hazards](#task-2-enabling-optimizations-on-the-hazards)
+  * [Task 3: Analyzing Performance Plots](#task-3-analyzing-performance-plots)
   * [Source Code](#source-code)
   * [Submission](#submission)
 - [Resources](#resources)
   * [GitHub Primer](#github-primer)
   * [Debugging C](#debugging-c)
+  * [Creating build environment on local machine](#creating-build-environment-on-local-machine)
+    + [For Windows 10 WSL or Linux](#for-windows-10-wsl-or-linux)
+    + [For Mac](#for-mac)
   * [Using DDD through remote X11 forwarding](#using-ddd-through-remote-x11-forwarding)
     + [For Windows 10](#for-windows-10)
     + [For MacOS](#for-macos)
     + [For Linux](#for-linux)
     + [Establishing SSH connection with X11 forwarding](#establishing-ssh-connection-with-x11-forwarding)
-  * [Using DDD by installing on local machine](#using-ddd-by-installing-on-local-machine)
-    + [For Windows 10 WSL or Linux](#for-windows-10-wsl-or-linux)
-    + [For Mac](#for-mac)
   * [DDD hang issue solution](#ddd-hang-issue-solution)
 
-
-# CS/COE 1541 - Introduction to Computer Architecture
-Spring Semester 2022 - Project 1
+# CS 1541 - Introduction to Computer Architecture
+Spring Semester 2023 - Project 1
 
 Please accept Project 1 on **GitHub Classroom** using the following link:
-https://classroom.github.com/a/jREHYDcC
+TBD
 
-* DUE: Mar 16 (Wednesday), 2022 4:30 PM 
+* DUE: Mar 20 (Monday), 2023 4:30 PM 
 
 # Introduction
 
@@ -72,15 +72,24 @@ An **in-order** processor issues instructions strictly in program order.  Thus, 
 
 ## Environment Setup
 
-The project is setup to run with the g++ compiler (GNU C++ compiler) and a Make build system.  This system is already in place on the departmental thoth machine (thoth.cs.pitt.edu).  If you have a similar setup on your local computer, please feel free to use your machine for development.  Otherwise, you need to log in to thoth.cs.pitt.edu which may involve some setup.  Here are the steps you need to take:
+The project is setup to run with the g++ compiler (GNU C++ compiler) and a
+Make build system.  This system is already in place on the departmental
+Linux machine (linux.cs.pitt.edu).  If you have a similar setup on your
+local computer, please feel free to use your machine for development.
+Otherwise, you need to log in to linux.cs.pitt.edu which may involve some
+setup.  Note that you need to be on Pitt VPN to connect to linux.cs.pitt.edu
+off-campus (instructions at
+https://www.technology.pitt.edu/services/pittnet-vpn-pulse-secure).
+
+Assuming you are on the Pitt network, here are the steps you need to take:
 
 1. Most OSes (Windows, MacOS, Linux) comes with built-in SSH clients accessible using this simple command on your commandline shell:
    ```
-   ssh USERNAME@thoth.cs.pitt.edu
+   ssh USERNAME@linux.cs.pitt.edu
    ```
    If you want a more fancy SSH client, you can download Putty, a free open source terminal:
    https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html
-   Connect to "thoth.cs.pitt.edu" by typing that in the "Host Name" box.  Make sure that port is 22 and SSH is selected in the radio button options.
+   Connect to "linux.cs.pitt.edu" by typing that in the "Host Name" box.  Make sure that port is 22 and SSH is selected in the radio button options.
 
 2. Once connected, the host will ask for your Pitt SSO credentials.  Enter your password.
 
@@ -391,11 +400,12 @@ active at a time, only one is shown.
 
 ## Creating Performance Plots
 
-**UNDER CONSTRUCTION.  DO NOT TRY YET.**
+**CONSTRUCTION COMPLETE!  DO TO COMPLETE THE PROJECT 1 RETROSPECTIVE!**
 
 Once you are done implementing the simulator, now you can use it to generate
-some performance plots for longer traces of execution.  In order to generate
-the plots, do the following:
+some performance plots for longer traces of execution.  
+
+Generate the plots by invoking the plots target in the Makefile:
 
 
 ```
@@ -533,7 +543,23 @@ In terms of your simulator, this means on a taken branch, inserting bubbles into
 
 ## Task 2: Enabling Optimizations on the Hazards
 
-Enable all the hazard avoidance optimizations that were described in the [Configuration Files](#configuration-files) section.  Be careful that while the optimizations will reduce hazards drastically, there are some hazards that remain even after the optimizations.
+Enable all the hazard avoidance optimizations that were described in the
+[Configuration Files](#configuration-files) section.  Be careful that while the
+optimizations will reduce hazards drastically, there are some hazards that
+remain even after the optimizations.  After having completed this step, your
+five_stage simulator should work identically to the five_stage_solution
+simulator and all diff tests should pass.
+
+## Task 3: Analyzing Performance Plots
+
+**CONSTRUCTION COMPLETE!  DO TO COMPLETE THE PROJECT 1 RETROSPECTIVE!**
+
+First, generate the IPC.pdf and IPC_solution.pdf performance plots and verify
+that they are identical.  Refer to the [Creating Performance
+Plots](#creating-performance-plots) section on how to generate these plots.
+Then, answer the Project 1 Retrospective questions by analyzing the plots.
+**If your plot differs from the solution plot due to incomplete implementation,
+please use the solution plot to answer the questions**.
 
 ## Source Code
 
@@ -564,7 +590,7 @@ enum opcode_type {
 };
 ```
 
-The “PC” (program counter) field is the address of the instruction itself. The “type” of an instruction provides the key information about the instruction. A detailed list of instructions is given below:
+The "PC" (program counter) field is the address of the instruction itself. The "type" of an instruction provides the key information about the instruction. A detailed list of instructions is given below:
 
 ```
 NOP - it's a no-op. No further information is provided.
@@ -625,7 +651,7 @@ explained below.
 
 You will do two submissions for this deliverable.
 
-1. **(90 points)** Project 1 Soure Code (Due Mar 16, 2022 4:30 PM)
+1. **(90 points)** Project 1 Soure Code (Due Mar 20, 2023 4:30 PM)
 
    The easiest way to submit the source code is by submitting your GitHub
 repository.  Add your partner as a collaborator so both of you have access.
@@ -651,10 +677,8 @@ folder will be used for any files that you don't upload.  While this method in
 the short run is simpler than the GitHub method, you will find that using a
 source repository like GitHub is beneficial in the long run.
     
-1. **(20 points)** Project 1 Retrospective (Due TBD)
+1. **(20 points)** Project 1 Retrospective (Due Mar 27, 2023 4:30 PM)
 
-   **NOT AVAILABLE YET**
-   
    Click on the GradeScope "Project 1 Retrospective" link and answer the
 questions based on [Task 3: Analyzing Performance
 Plots](#task-3-analyzing-performance-plots).  Note that this submission is
@@ -740,68 +764,9 @@ If you want a graphical interface to GDB there is DDD (Data Display Debugger):
 GDB, Valgrind, and DDD are all available on thoth.cs.pitt.edu, but for you to
 be able to access the DDD GUI over SSH, you will need X11 forwarding enabled.
 
-## Using DDD through remote X11 forwarding
+## Creating build environment on local machine
 
-This is how you can use the DDD installation on thoth remotely.
-
-### For Windows 10
-
-Enabling X11 forwarding on Windows 10 is a bit complicated since you have to do
-deal with Windows firewall.  Here is an easy to follow guide written by another
-Computer Architecture professor from the University of Illinois (which also
-happens to be my alma mater :).
-
-* If you have WSL1 installed: https://cs233.github.io/oyom_wsl1_setup.html
-* If you have WSL2 installed: https://cs233.github.io/oyom_wsl2_setup.html
-
-### For MacOS
-
-Enabling X11 forwarding on Mac systems is more straightforward.  All you have to do install XQuartz and launch it:
-
-* XQuartz download URL: https://www.xquartz.org/
-
-### For Linux
-
-For most Linux systems, X11 forwarding should be built-in with the X windows
-system, so no additional installations are needed.
-
-### Establishing SSH connection with X11 forwarding
-
-After enabling X11 forwarding, you have to specify X11 forwarding on your SSH
-connection.  When you connect to thoth, use the following commandline:
-
-```
-ssh -XC USERNAME@thoth.cs.pitt.edu
-```
-
-The -X option enables X11 forwarding and the -C option enables packet
-compression on your SSH connection so you can minimize the bandwidth consumed
-by X11 forwarding.
-
-If all goes well, after you log on to thoth, your $DISPLAY variable should be set up automatically.
-
-```
-wahn@thoth:~$ echo $DISPLAY
-localhost:10.0
-```
-
-If your $DISPLAY is not set up, then that means that something went wrong.
-Either VcXsrv (for Windows) or XQuartz (for Mac) was not set up or something
-else.  Note that you should not force set $DISPLAY on your .bashrc file.  That
-is not going to achieve anything.  $DISPLAY should be automatically set by SSH.
-
-Once the above is confirmed, you can start using any GUI app on thoth.  Now try
-launching DDD:
-
-```
-ddd
-```
-
-The DDD GUI should pop up on your machine momentarily.
-
-## Using DDD by installing on local machine
-
-This is how you can install DDD on your local machine.
+This is how you can install a g++ build and debug environment on your local laptop, in case you don't want to work in a remote environment.
 
 ### For Windows 10 WSL or Linux
 
@@ -857,29 +822,69 @@ Then use Homebrew to install all required libraries:
 brew install glib
 ```
 
-You will also have to add some modifications to the Makefile:
-
-Change the COPT line from:
-```
-COPT = -g -Wall -I/usr/include/glib-2.0/ -I/usr/lib/x86_64-linux-gnu/glib-2.0/include/
-```
-to:
-```
-COPT = -g -Wall -I/usr/include/glib-2.0/ -I/usr/lib/x86_64-linux-gnu/glib-2.0/include/ -I/usr/local/opt/glib/include/glib-2.0/ -I/usr/local/opt/glib/lib/glib-2.0/include/
-```
-
-Also change the LOPT line from:
-```
-LOPT = -lglib-2.0
-```
-to
-```
-LOPT = -lglib-2.0 -L/usr/local/opt/glib/lib/
-```
-
-Lastly, replace all mentions of "five_stage_solution" to
+In the Makefile, replace all mentions of "five_stage_solution" to
 "five_stage_solution.mac".  The five_stage_solution binary was compiled on
-thoth (a Linux machine) which cannot run on a Mac.
+linux.cs.pitt.edu (a Linux machine) which cannot run on a Mac.
+
+## Using DDD through remote X11 forwarding
+
+In order to use DDD on linux.cs.pitt.edu, since DDD is a GUI application,
+you need enable X11 forwarding in your SSH connection.
+
+### For Windows 10
+
+Enabling X11 forwarding on Windows 10 is a bit complicated since you have to do
+deal with Windows firewall.  Here is an easy to follow guide written by another
+Computer Architecture professor from the University of Illinois (which also
+happens to be my alma mater :).
+
+* If you have WSL1 installed: https://cs233.github.io/oyom_wsl1_setup.html
+* If you have WSL2 installed: https://cs233.github.io/oyom_wsl2_setup.html
+
+### For MacOS
+
+Enabling X11 forwarding on Mac systems is more straightforward.  All you have to do install XQuartz and launch it:
+
+* XQuartz download URL: https://www.xquartz.org/
+
+### For Linux
+
+For most Linux systems, X11 forwarding should be built-in with the X windows
+system, so no additional installations are needed.
+
+### Establishing SSH connection with X11 forwarding
+
+After enabling X11 forwarding, you have to specify X11 forwarding on your SSH
+connection.  When you connect to thoth, use the following commandline:
+
+```
+ssh -XC USERNAME@thoth.cs.pitt.edu
+```
+
+The -X option enables X11 forwarding and the -C option enables packet
+compression on your SSH connection so you can minimize the bandwidth consumed
+by X11 forwarding.
+
+If all goes well, after you log on to thoth, your $DISPLAY variable should be set up automatically.
+
+```
+wahn@thoth:~$ echo $DISPLAY
+localhost:10.0
+```
+
+If your $DISPLAY is not set up, then that means that something went wrong.
+Either VcXsrv (for Windows) or XQuartz (for Mac) was not set up or something
+else.  Note that you should not force set $DISPLAY on your .bashrc file.  That
+is not going to achieve anything.  $DISPLAY should be automatically set by SSH.
+
+Once the above is confirmed, you can start using any GUI app on thoth.  Now try
+launching DDD:
+
+```
+ddd
+```
+
+The DDD GUI should pop up on your machine momentarily.
 
 ## DDD hang issue solution
 
