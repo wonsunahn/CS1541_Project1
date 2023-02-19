@@ -768,7 +768,7 @@ If you want a graphical interface to GDB there is DDD (Data Display Debugger):
 
 * DDD tutorial: [DDD tutorial](https://www.gnu.org/software/ddd/manual/html_mono/ddd.html)
 
-GDB, Valgrind, and DDD are all available on thoth.cs.pitt.edu, but for you to
+GDB, Valgrind, and DDD are all available on linux.cs.pitt.edu, but for you to
 be able to access the DDD GUI over SSH, you will need X11 forwarding enabled.
 
 ## Creating build environment on local machine
@@ -815,8 +815,8 @@ It bas been a long standing problem but has still not been solved:
 https://sourceware.org/bugzilla/show_bug.cgi?id=24069
 
 At least, you can still compile and test the program on your local machine.
-If you want to use gdb or ddd, you will have to do it remotely on thoth.  At
-below are the steps to install the necessary packages.
+If you want to use gdb or ddd, you will have to do it remotely on
+linux.cs.pitt.edu.  At below are the steps to install the necessary packages.
 
 First you will have to install the XCode commandline developer tools, which
 includes gcc and g++:
@@ -862,20 +862,20 @@ system, so no additional installations are needed.
 ### Establishing SSH connection with X11 forwarding
 
 After enabling X11 forwarding, you have to specify X11 forwarding on your SSH
-connection.  When you connect to thoth, use the following commandline:
+connection.  When you connect to linux.cs.pitt.edu, use the following commandline:
 
 ```
-ssh -XC USERNAME@thoth.cs.pitt.edu
+ssh -XC USERNAME@linux.cs.pitt.edu
 ```
 
 The -X option enables X11 forwarding and the -C option enables packet
 compression on your SSH connection so you can minimize the bandwidth consumed
 by X11 forwarding.
 
-If all goes well, after you log on to thoth, your $DISPLAY variable should be set up automatically.
+If all goes well, after you log on to lnux.cs.pitt.edu, your $DISPLAY variable should be set up automatically.
 
 ```
-wahn@thoth:~$ echo $DISPLAY
+$ echo $DISPLAY
 localhost:10.0
 ```
 
@@ -884,8 +884,8 @@ Either VcXsrv (for Windows) or XQuartz (for Mac) was not set up or something
 else.  Note that you should not force set $DISPLAY on your .bashrc file.  That
 is not going to achieve anything.  $DISPLAY should be automatically set by SSH.
 
-Once the above is confirmed, you can start using any GUI app on thoth.  Now try
-launching DDD:
+Once the above is confirmed, you can start using any GUI app on
+linux.cs.pitt.edu.  Now try launching DDD:
 
 ```
 ddd
