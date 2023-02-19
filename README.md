@@ -35,10 +35,17 @@
 # CS 1541 - Introduction to Computer Architecture
 Spring Semester 2023 - Project 1
 
-Please accept Project 1 on **GitHub Classroom** using the following link:
-TBD
-
 * DUE: Mar 20 (Monday), 2023 4:30 PM 
+
+Please accept Project 1 on **GitHub Classroom** using: [**this link**](https://classroom.github.com/a/CAjqCRK_)
+
+When you click on the above link, you will be asked to select your email
+address from a list.  After you select, you will be asked to either create a
+new team or join a team.  The first member of a group will create a new team
+and communicate that team name to the second member, and the second member
+will joint that team.  This will create a shared GitHub repository that both
+of you can work on.  It is created in **private** mode by default --- please
+keep it that way.
 
 # Introduction
 
