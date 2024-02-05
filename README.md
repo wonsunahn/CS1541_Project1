@@ -807,7 +807,7 @@ open the folder where you cloned it to using VSCode File > Open Folder menu.
 Then open a 'Git Bash' terminal by selecting it from the drop down on the
 Terminal tab on the bottom panel as shown in the image below.
 
-<img alt="Git Bash" src="img/vscode_git_base.png" width=700>
+<img alt="Git Bash" src="img/vscode_git_bash.png" width=700>
 
 On the terminal, you will be able to perform all the 'make' commands explained
 above, except that you will have to replace all mentions of the 'make' binary
