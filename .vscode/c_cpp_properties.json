@@ -1,7 +1,7 @@
 {
     "configurations": [
         {
-            "name": "Win64",
+            "name": "Win32",
             "includePath": [
                 "C:/msys64/mingw64/bin/../include/glib-2.0",
                 "C:/msys64/mingw64/bin/../lib/glib-2.0/include",
