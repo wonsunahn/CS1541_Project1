@@ -21,7 +21,7 @@
   * [Submission](#submission)
 - [Resources](#resources)
   * [GitHub Primer](#github-primer)
-  * [Debugging C/C++](#debugging-c-c--)
+  * [Debugging C/C++](#debugging-cc)
   * [Creating build environment on local machine](#creating-build-environment-on-local-machine)
     + [For Windows](#for-windows)
     + [For Mac](#for-mac)
