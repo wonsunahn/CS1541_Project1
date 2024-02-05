@@ -12,9 +12,7 @@
             "intelliSenseMode": "windows-gcc-x64",
             "cStandard": "c17",
             "cppStandard": "gnu++17"
-        }
-    ],
-    "configurations": [
+        },
         {
             "name": "Mac",
             "compilerPath": "/usr/bin/g++",
