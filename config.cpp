@@ -21,7 +21,7 @@ int parse_config(const char *config_file_name)
   /* Load the GKeyFile from keyfile.conf or return. */
   if (!g_key_file_load_from_file (keyfile, config_file_name, G_KEY_FILE_NONE, &error))
   {
-    g_error (error->message);
+    g_error ("%s", error->message);
     return 0;
   }
 
