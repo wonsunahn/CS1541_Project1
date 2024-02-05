@@ -4,8 +4,8 @@ FIVE_STAGE_SOLUTION = ./five_stage_solution.linux
 SHORT_TRACES_DIR = /afs/cs.pitt.edu/courses/1541/short_traces
 GNUPLOT = /afs/cs.pitt.edu/courses/1541/gnuplot-5.2.8/bin/gnuplot
 
-SOURCES = $(wildcard *.c)
-OBJECTS = $(SOURCES:%.c=%.o)
+SOURCES = $(wildcard *.cpp)
+OBJECTS = $(SOURCES:%.cpp=%.o)
 CONFS = $(wildcard confs/*.conf)
 TRACES = $(wildcard traces/*.tr)
 OUTPUTS := $(foreach conf,$(CONFS),$(foreach trace, $(TRACES), outputs/$(trace:traces/%.tr=%).$(conf:confs/%.conf=%).out))
@@ -18,7 +18,7 @@ PLOT_OUTPUTS := $(foreach conf,$(PLOT_CONFS),$(foreach trace, $(SHORT_TRACES), p
 PLOT_OUTPUTS_SOLUTION := $(foreach conf,$(PLOT_CONFS),$(foreach trace, $(SHORT_TRACES), plots_solution/$(trace:$(SHORT_TRACES_DIR)/%.tr=%).$(conf:plot_confs/%.conf=%).out))
 
 COPT = -g -Wall `pkg-config --cflags glib-2.0`
-LOPT = `pkg-config --libs glib-2.0`
+LOPT = -g `pkg-config --libs glib-2.0`
 CC = g++
 
 all: build run
@@ -40,7 +40,7 @@ trace_reader: trace_reader.o config.o CPU.o trace.o
 trace_generator: trace_generator.o config.o CPU.o trace.o
 	$(CC) $^ $(LOPT) -o $@
 
-%.o: %.c
+%.o: %.cpp
 	$(CC) -c $(COPT) $<
 
 define run_rules
