@@ -1,6 +1,19 @@
 TARGETS = five_stage trace_reader trace_generator
 
-FIVE_STAGE_SOLUTION = ./five_stage_solution.linux
+ifeq ($(OS),Windows_NT)
+	FIVE_STAGE_SOLUTION = ./five_stage_solution.exe
+else
+	UNAME_S := $(shell uname -s)
+    ifeq ($(UNAME_S),Linux)
+        FIVE_STAGE_SOLUTION = ./five_stage_solution.linux
+		CASAN = -fsanitize=address
+		LASAN = -fsanitize=address
+    endif
+    ifeq ($(UNAME_S),Darwin)
+        FIVE_STAGE_SOLUTION = ./five_stage_solution.mac
+    endif
+endif
+
 SHORT_TRACES_DIR = /afs/cs.pitt.edu/courses/1541/short_traces
 GNUPLOT = /afs/cs.pitt.edu/courses/1541/gnuplot-5.2.8/bin/gnuplot
 
@@ -17,8 +30,8 @@ PLOT_CONFS = $(wildcard plot_confs/*.conf)
 PLOT_OUTPUTS := $(foreach conf,$(PLOT_CONFS),$(foreach trace, $(SHORT_TRACES), plots/$(trace:$(SHORT_TRACES_DIR)/%.tr=%).$(conf:plot_confs/%.conf=%).out))
 PLOT_OUTPUTS_SOLUTION := $(foreach conf,$(PLOT_CONFS),$(foreach trace, $(SHORT_TRACES), plots_solution/$(trace:$(SHORT_TRACES_DIR)/%.tr=%).$(conf:plot_confs/%.conf=%).out))
 
-COPT = -g -Wall `pkg-config --cflags glib-2.0`
-LOPT = -g `pkg-config --libs glib-2.0`
+COPT = -g -Wall $(CASAN) `pkg-config --cflags glib-2.0`
+LOPT = -g $(LASAN) `pkg-config --libs glib-2.0`
 CC = g++
 
 all: build run
