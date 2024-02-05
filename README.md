@@ -11,12 +11,12 @@
   * [Configuration Files](#configuration-files)
   * [Trace Files](#trace-files)
 - [Your Tasks](#your-tasks)
-  * [Task 1: Enforcing Stalls and Flushes on Hazards](#task-1--enforcing-stalls-and-flushes-on-hazards)
+  * [Task 1: Enforcing Stalls and Flushes on Hazards](#task-1-enforcing-stalls-and-flushes-on-hazards)
     + [Structural hazards](#structural-hazards)
     + [Data hazards](#data-hazards)
     + [Control hazards](#control-hazards)
-  * [Task 2: Enabling Optimizations on the Hazards](#task-2--enabling-optimizations-on-the-hazards)
-  * [Task 3: Analyzing Performance Plots](#task-3--analyzing-performance-plots)
+  * [Task 2: Enabling Optimizations on the Hazards](#task-2-enabling-optimizations-on-the-hazards)
+  * [Task 3: Analyzing Performance Plots](#task-3-analyzing-performance-plots)
   * [Source Code](#source-code)
   * [Submission](#submission)
 - [Resources](#resources)
@@ -31,7 +31,7 @@ Spring Semester 2024 - Project 1
 
 * DUE: Mar 8 (Friday), 2024 11:59 PM 
 
-Please accept Project 1 on **GitHub Classroom** using this link: TBD
+Please accept Project 1 on **GitHub Classroom** using this link: https://classroom.github.com/a/as6auSF5
 
 When you click on the above link, you will be asked to select your email
 address from a list.  After you select, you will be asked to either create a
