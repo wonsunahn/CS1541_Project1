@@ -14,5 +14,21 @@
             "cppStandard": "gnu++17"
         }
     ],
+    "configurations": [
+        {
+            "name": "Mac",
+            "compilerPath": "/usr/bin/g++",
+            "includePath": [
+                "/opt/homebrew/Cellar/glib/2.78.4/include/glib-2.0",
+                "/opt/homebrew/Cellar/glib/2.78.4/lib/glib-2.0/include",
+                "/opt/homebrew/opt/gettext/include",
+                "/opt/homebrew/Cellar/pcre2/10.42/include",
+                "${workspaceFolder}"
+            ],
+            "intelliSenseMode": "macos-gcc-x64",
+            "cStandard": "c17",
+            "cppStandard": "gnu++17"
+        }
+    ],
     "version": 4
 }

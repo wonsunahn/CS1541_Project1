@@ -1,7 +1,7 @@
 {
   "configurations": [
     {
-      "name": "C++ Launch",
+      "name": "Launch five_stage",
       "type": "cppdbg",
       "request": "launch",
       "program": "${workspaceFolder}/five_stage",
