@@ -1,6 +1,6 @@
 TARGETS = five_stage trace_reader trace_generator
 
-FIVE_STAGE_SOLUTION = ./five_stage_solution.exe
+FIVE_STAGE_SOLUTION = ./five_stage_solution.linux
 SHORT_TRACES_DIR = /afs/cs.pitt.edu/courses/1541/short_traces
 GNUPLOT = /afs/cs.pitt.edu/courses/1541/gnuplot-5.2.8/bin/gnuplot
 
