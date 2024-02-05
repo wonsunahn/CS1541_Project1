@@ -15,7 +15,7 @@ int main(int argc, char **argv)
   instruction *tr_entry = (instruction *) malloc(sizeof(instruction));
   size_t size;
   char *trace_file_name;
-  dynamic_inst dinst = {0};
+  dynamic_inst dinst = {{0}};
   
   unsigned int t_sReg_a;
   unsigned int t_sReg_b;

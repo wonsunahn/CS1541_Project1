@@ -11,6 +11,8 @@ else
     endif
     ifeq ($(UNAME_S),Darwin)
         FIVE_STAGE_SOLUTION = ./five_stage_solution.mac
+		CASAN = -fsanitize=address
+		LASAN = -fsanitize=address
     endif
 endif
 

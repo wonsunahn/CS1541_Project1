@@ -13,8 +13,8 @@ unsigned int cycle_number = 0;
 unsigned int inst_number = 0;
 
 std::deque<dynamic_inst> IF, ID, WB;
-dynamic_inst EX_ALU = {0}, MEM_ALU = {0};
-dynamic_inst EX_lwsw = {0}, MEM_lwsw = {0};
+dynamic_inst EX_ALU = {{0}}, MEM_ALU = {{0}};
+dynamic_inst EX_lwsw = {{0}}, MEM_lwsw = {{0}};
 
 bool is_ALU(dynamic_inst dinst) {
   instruction inst = dinst.inst;
@@ -36,7 +36,7 @@ bool is_older(dynamic_inst dinst1, dynamic_inst dinst2) {
 }
 
 dynamic_inst get_NOP() {
-  dynamic_inst dinst = {0};
+  dynamic_inst dinst = {{0}};
   return dinst;
 }
 

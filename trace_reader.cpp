@@ -15,7 +15,7 @@ int main(int argc, char **argv)
   instruction *tr_entry = (instruction *) malloc(sizeof(instruction));
   size_t size;
   char *trace_file_name;
-  dynamic_inst dinst = {0};
+  dynamic_inst dinst = {{0}};
   
   if (argc == 1) {
     fprintf(stdout, "\nMissing argument: the name of the file to be read\n");
