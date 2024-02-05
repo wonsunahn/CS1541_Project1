@@ -59,7 +59,7 @@ You will build your simulator with similar goals in mind.  You will identify the
 
 The simplified 2-wide processor pipeline that you will simulate has the following basic structure:
 
-<img alt="Pipeline" src="img/Project1_diagram.png" width=700>
+<img alt="Pipeline" src="img/Project1_diagram.png">
 
 The processor can fetch two instructions at a time, decode two instructions at a time, and also writeback the results two at a time, which is why it is called a 2-wide processor.  For the EX stage, instructions are routed to two different execution units depending on the instruction type.  Lw (load word) and sw (store word) instructions are routed to the lw/sw EX unit and all instructions other than lw/sw are routed to the ALU/Branch EX unit.  Lw/sw instructions also pass through a MEM unit that performs the load or store.  ALU/Branch instructions don't require a MEM unit but they pass through an "empty" pipeline stage nonetheless so that both lw/sw and ALU/Branch instructions can perform WB at the same stage.  Having WB, or register writeback, at the same stage simplifies processor design (for example, allowing less write ports in the register file).
 
