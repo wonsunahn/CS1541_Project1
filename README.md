@@ -11,41 +11,35 @@
   * [Configuration Files](#configuration-files)
   * [Trace Files](#trace-files)
 - [Your Tasks](#your-tasks)
-  * [Task 1: Enforcing Stalls and Flushes on Hazards](#task-1-enforcing-stalls-and-flushes-on-hazards)
+  * [Task 1: Enforcing Stalls and Flushes on Hazards](#task-1--enforcing-stalls-and-flushes-on-hazards)
     + [Structural hazards](#structural-hazards)
     + [Data hazards](#data-hazards)
     + [Control hazards](#control-hazards)
-  * [Task 2: Enabling Optimizations on the Hazards](#task-2-enabling-optimizations-on-the-hazards)
-  * [Task 3: Analyzing Performance Plots](#task-3-analyzing-performance-plots)
+  * [Task 2: Enabling Optimizations on the Hazards](#task-2--enabling-optimizations-on-the-hazards)
+  * [Task 3: Analyzing Performance Plots](#task-3--analyzing-performance-plots)
   * [Source Code](#source-code)
   * [Submission](#submission)
 - [Resources](#resources)
   * [GitHub Primer](#github-primer)
-  * [Debugging C](#debugging-c)
+  * [Debugging C/C++](#debugging-c-c--)
   * [Creating build environment on local machine](#creating-build-environment-on-local-machine)
-    + [For Windows 10 WSL or Linux](#for-windows-10-wsl-or-linux)
+    + [For Windows](#for-windows)
     + [For Mac](#for-mac)
-  * [Using DDD through remote X11 forwarding](#using-ddd-through-remote-x11-forwarding)
-    + [For Windows 10](#for-windows-10)
-    + [For MacOS](#for-macos)
-    + [For Linux](#for-linux)
-    + [Establishing SSH connection with X11 forwarding](#establishing-ssh-connection-with-x11-forwarding)
-  * [DDD hang issue solution](#ddd-hang-issue-solution)
 
 # CS 1541 - Introduction to Computer Architecture
-Spring Semester 2023 - Project 1
+Spring Semester 2024 - Project 1
 
-* DUE: Mar 20 (Monday), 2023 4:30 PM 
+* DUE: Mar 8 (Friday), 2024 11:59 PM 
 
-Please accept Project 1 on **GitHub Classroom** using: [**this link**](https://classroom.github.com/a/CAjqCRK_)
+Please accept Project 1 on **GitHub Classroom** using this link: TBD
 
 When you click on the above link, you will be asked to select your email
 address from a list.  After you select, you will be asked to either create a
 new team or join a team.  The first member of a group will create a new team
-and communicate that team name to the second member, and the second member
-will joint that team.  This will create a shared GitHub repository that both
-of you can work on.  It is created in **private** mode by default --- please
-keep it that way.
+and communicate that team name to the second member, and the second member will
+join that team.  This will create a shared GitHub repository that both of you
+can work on.  It is created in **private** mode by default --- please keep it
+that way.
 
 # Introduction
 
@@ -65,7 +59,7 @@ You will build your simulator with similar goals in mind.  You will identify the
 
 The simplified 2-wide processor pipeline that you will simulate has the following basic structure:
 
-<img alt="Pipeline" src=Project1_diagram.png width=700>
+<img alt="Pipeline" src="img/Project1_diagram.png" width=700>
 
 The processor can fetch two instructions at a time, decode two instructions at a time, and also writeback the results two at a time, which is why it is called a 2-wide processor.  For the EX stage, instructions are routed to two different execution units depending on the instruction type.  Lw (load word) and sw (store word) instructions are routed to the lw/sw EX unit and all instructions other than lw/sw are routed to the ALU/Branch EX unit.  Lw/sw instructions also pass through a MEM unit that performs the load or store.  ALU/Branch instructions don't require a MEM unit but they pass through an "empty" pipeline stage nonetheless so that both lw/sw and ALU/Branch instructions can perform WB at the same stage.  Having WB, or register writeback, at the same stage simplifies processor design (for example, allowing less write ports in the register file).
 
@@ -81,10 +75,10 @@ An **in-order** processor issues instructions strictly in program order.  Thus, 
 
 The project is setup to run with the g++ compiler (GNU C++ compiler) and a
 Make build system.  This system is already in place on the departmental
-Linux machine (linux.cs.pitt.edu).  If you have a similar setup on your
+Linux machine (thoth.cs.pitt.edu).  If you have a similar setup on your
 local computer, please feel free to use your machine for development.
-Otherwise, you need to log in to linux.cs.pitt.edu which may involve some
-setup.  Note that you need to be on Pitt VPN to connect to linux.cs.pitt.edu
+Otherwise, you need to log in to thoth.cs.pitt.edu which may involve some
+setup.  Note that you need to be on Pitt VPN to connect to thoth.cs.pitt.edu
 off-campus (instructions at
 https://www.technology.pitt.edu/services/pittnet-vpn-pulse-secure).
 
@@ -92,11 +86,8 @@ Assuming you are on the Pitt network, here are the steps you need to take:
 
 1. Most OSes (Windows, MacOS, Linux) comes with built-in SSH clients accessible using this simple command on your commandline shell:
    ```
-   ssh USERNAME@linux.cs.pitt.edu
+   ssh USERNAME@thoth.cs.pitt.edu
    ```
-   If you want a more fancy SSH client, you can download Putty, a free open source terminal:
-   https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html
-   Connect to "linux.cs.pitt.edu" by typing that in the "Host Name" box.  Make sure that port is 22 and SSH is selected in the radio button options.
 
 2. Once connected, the host will ask for your Pitt SSO credentials.  Enter your password.
 
@@ -118,16 +109,16 @@ https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-
 
 Here is an overview of the directory structure:
 
-* config.c / config.h : Functions used to parse and read in the processor configuration file.
-* **CPU.c / CPU.h** : Implements the five stages of the processor pipeline.  The code you will be **modifying**.
-* **five_stage.c** : **Main function**. Invokes the five stages in CPU.c at every clock cycle.
-* **five_stage_solution** : **Reference solution binary** for the project.
+* config.cpp / config.h : Functions used to parse and read in the processor configuration file.
+* **CPU.cpp / CPU.h** : Implements the five stages of the processor pipeline.  The code you will be **modifying**.
+* **five_stage.cpp** : **Main function**. Invokes the five stages in CPU.cpp at every clock cycle.
+* five_stage_solution.linux, five_stage_solution.mac, five_stage_solution.exe: **Reference solution binaries** for Linux, MacOS, and Windows respectively.
 * generate_plot.plt : GNUPlot script to generate the plot PDF file from the data.
 * generate_plot.py: Python script to extrace performance data from results in tabular form.
 * Makefile : The build script for the Make tool.
-* trace.c / trace.h : Functions to read and write the trace file.
-* trace_generator.c : Utility program to generate a trace file of your own.
-* trace_reader.c : Utility program to read and print out the contents of a trace file in human readable format.
+* trace.cpp / trace.h : Functions to read and write the trace file.
+* trace_generator.cpp : Utility program to generate a trace file of your own.
+* trace_reader.cpp : Utility program to read and print out the contents of a trace file in human readable format.
 * confs/ : Directory where processor configuration files are.
 * **diffs/** : Directory where **differences** between outputs/ and outputs_solution/ are stored.
 * outputs/ : Directory where outputs after running five_stage are stored.
@@ -146,10 +137,10 @@ make
 The output should look like:
 
 ```
-g++ -c -g -Wall -I/usr/include/glib-2.0/ -I/usr/lib64/glib-2.0/include/ five_stage.c
-g++ -c -g -Wall -I/usr/include/glib-2.0/ -I/usr/lib64/glib-2.0/include/ config.c
-g++ -c -g -Wall -I/usr/include/glib-2.0/ -I/usr/lib64/glib-2.0/include/ CPU.c
-g++ -c -g -Wall -I/usr/include/glib-2.0/ -I/usr/lib64/glib-2.0/include/ trace.c
+g++ -c -g -Wall -I/usr/include/glib-2.0/ -I/usr/lib64/glib-2.0/include/ five_stage.cpp
+g++ -c -g -Wall -I/usr/include/glib-2.0/ -I/usr/lib64/glib-2.0/include/ config.cpp
+g++ -c -g -Wall -I/usr/include/glib-2.0/ -I/usr/lib64/glib-2.0/include/ CPU.cpp
+g++ -c -g -Wall -I/usr/include/glib-2.0/ -I/usr/lib64/glib-2.0/include/ trace.cpp
 ...
 ```
 
@@ -189,7 +180,7 @@ Optionally, you can also run your simulator on more sizable benchmarks.  I have 
 
 ## Program Output
 
-You are given a program, five_stage.c, which reads a trace file (a binary file containing a sequence of executed instructions) and simulates a 5 stage pipeline ignoring any control and data hazards. It outputs the total number of cycles needed to execute the instructions in the trace file and, also calculates the IPC (Instructions Per Cycle):
+You are given a program, five_stage.cpp, which reads a trace file (a binary file containing a sequence of executed instructions) and simulates a 5 stage pipeline ignoring any control and data hazards. It outputs the total number of cycles needed to execute the instructions in the trace file and, also calculates the IPC (Instructions Per Cycle):
 
 ```
 ./five_stage -t traces/sample.tr -c confs/2-wide.conf
@@ -407,8 +398,6 @@ active at a time, only one is shown.
 
 ## Creating Performance Plots
 
-**CONSTRUCTION COMPLETE!  DO TO COMPLETE THE PROJECT 1 RETROSPECTIVE!**
-
 Once you are done implementing the simulator, now you can use it to generate
 some performance plots for longer traces of execution.  
 
@@ -570,7 +559,7 @@ please use the solution plot to answer the questions**.
 
 ## Source Code
 
-Each trace file is a sequence of dynamic trace items, where each trace item represents one instruction executed in the program that has been traced. After five_stage.c  reads a trace item, it stores it in a structure:
+Each trace file is a sequence of dynamic trace items, where each trace item represents one instruction executed in the program that has been traced. After five_stage.cpp  reads a trace item, it stores it in a structure:
 
 ```
 struct instruction {
@@ -658,7 +647,7 @@ explained below.
 
 You will do two submissions for this deliverable.
 
-1. **(90 points)** Project 1 Soure Code (Due Mar 20, 2023 4:30 PM)
+1. **(90 points)** Project 1 Soure Code (Due Mar 8, 2024 11:59 PM)
 
    The easiest way to submit the source code is by submitting your GitHub
 repository.  Add your partner as a collaborator so both of you have access.
@@ -684,7 +673,7 @@ folder will be used for any files that you don't upload.  While this method in
 the short run is simpler than the GitHub method, you will find that using a
 source repository like GitHub is beneficial in the long run.
     
-1. **(20 points)** Project 1 Retrospective (Due Mar 27, 2023 4:30 PM)
+1. **(20 points)** Project 1 Retrospective (Due Mar 18, 2024 4:30 PM)
 
    Click on the GradeScope "Project 1 Retrospective" link and answer the
 questions based on [Task 3: Analyzing Performance
@@ -709,13 +698,15 @@ simulator will not get you any points.
     
 # Resources
 
-* Windows SSH Terminal Client: [Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)
-* GitHub GUI Client: [GitHub Desktop](https://desktop.github.com/)
-* File Transfer Client: [FileZilla](https://filezilla-project.org/download.php?type=client)
-* Linux command line tutorial: [The Linux Command Line](http://linuxcommand.org/lc3_learning_the_shell.php)
-* Valgrind tutorial: [Valgrind tutorial](https://valgrind.org/docs/manual/QuickStart.html)
-* GDB tutorial: [GDB tutorial](https://sourceware.org/gdb/current/onlinedocs/gdb/)
-* DDD tutorial: [DDD tutorial](https://www.gnu.org/software/ddd/manual/html_mono/ddd.html)
+In this section are various tutorials about using Git and debugging C code that
+you will find useful.  At below are links to resources mentioned in the
+tutorials.
+
+* [The Linux Command Line tutorial](http://linuxcommand.org/lc3_learning_the_shell.php)
+* [GitHub Desktop](https://desktop.github.com/)
+* [Google ASAN Tutorial](https://github.com/google/sanitizers/wiki/AddressSanitizer)
+* [GDB tutorial](https://sourceware.org/gdb/current/onlinedocs/gdb/)
+* [VSCode Debugging tutorial](https://code.visualstudio.com/docs/editor/debugging)
 
 ## GitHub Primer
 
@@ -755,159 +746,110 @@ whenever you Push, notify your group members so that they can Pull.  Here is a s
 
    https://github.com/git-guides/git-pull
 
-## Debugging C
+## Debugging C/C++
 
 You can use all the tools that you learned in CS 449 to debug your simulator,
-including GDB (the GNU Debugger) and Valgrind.  Here are couple of tutorials to
-jog your memory:
+including debug printf statements and GDB (the GNU Debugger).  Also, I will
+have you use a new tool called Google Address Sanitizer (ASAN) that you may not
+have used before.  ASAN is useful for catching memory bugs in C/C++ programs as
+soon as they occur, rather than wait for them to cause memory corruption or a
+segmentation fault.  ASAN also provides a stack trace of the memory error with
+source line numbers of exactly where it occurred, in ways very similar to a
+Java stack trace.  Your compiled binary is automatically instrumented with ASAN
+when you run the program on Linux (thoth.cs.pitt.edu) or Mac (see below on how
+to do that), by the Makefile.  Unfortunately, ASAN is not yet available on
+Windows, so you will need to run your program on thoth to detect memory bugs,
+if you are using Windows.
 
-* Valgrind tutorial: [Valgrind tutorial](https://valgrind.org/docs/manual/QuickStart.html)
-* GDB tutorial: [GDB tutorial](https://sourceware.org/gdb/current/onlinedocs/gdb/)
-
-If you want a graphical interface to GDB there is DDD (Data Display Debugger):
-
-* DDD tutorial: [DDD tutorial](https://www.gnu.org/software/ddd/manual/html_mono/ddd.html)
-
-GDB, Valgrind, and DDD are all available on linux.cs.pitt.edu, but for you to
-be able to access the DDD GUI over SSH, you will need X11 forwarding enabled.
+* [GDB tutorial](https://sourceware.org/gdb/current/onlinedocs/gdb/)
+* [Google ASAN Tutorial](https://github.com/google/sanitizers/wiki/AddressSanitizer)
 
 ## Creating build environment on local machine
 
-This is how you can install a g++ build and debug environment on your local laptop, in case you don't want to work in a remote environment.
+Please note that, you will need to generate the performance plots on
+thoth.cs.pitt.edu as it needs GNU Plot installed on that machine.  But for the
+purposes of implementing, debugging, and testing your simulator, you can choose
+to work on your local machine using the Visual Studio Code (VSCode) IDE.  If
+you don't have VSCode already, please download and install from:
+https://code.visualstudio.com/download
 
-### For Windows 10 WSL or Linux
+After you install VSCode, please install the following two extensions.
+1. C/C++ Extension Pack: https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools-extension-pack
+2. Makefile Extension: https://marketplace.visualstudio.com/items?itemName=ms-vscode.makefile-tools
 
-These are the packages required to compile the project and run DDD, using the
-apt package manager.  Please do the following on your linux shell:
+There are a few more things you need to setup depending on whether you are
+using Windows or Mac.
 
+### For Windows
+
+You will need to set up MinGW on Windows for Linux emulation following directions on this link:
+https://code.visualstudio.com/docs/cpp/config-mingw
+
+You just need to follow the part where you install MSYS2 and then the development tool chain using the command:
 ```
-sudo apt install gcc
+pacman -S --needed base-devel mingw-w64-ucrt-x86_64-toolchain
 ```
+
+After the above, you will need to on the same UCRT64 terminal install the glib2 package needed by the program:
 ```
-sudo apt install g++
+pacman -S mingw-w64-ucrt-x86_64-glib2
 ```
-```
-sudo apt install make
-```
-```
-sudo apt install libglib2.0-dev
-```
-```
-sudo apt install libcairo2-dev
-```
-```
-sudo apt install libpango1.0-dev
-```
-```
-sudo apt install gdb
-```
-```
-sudo apt install x11-apps
-```
-```
-sudo apt install ddd
-```
+
+If you need to, you can launch the MSYS2 UCRT64 terminal easily by searching it
+on the Windows finder.  
+
+Then, if you don't have it already, install the Git commandline tool (this is
+the easiest way to get a bash terminal on to VSCode):
+https://git-scm.com/download/win
+
+After having done that, clone the project repository on to your laptop and then
+open the folder where you cloned it to using VSCode File > Open Folder menu.
+Then open a 'Git Bash' terminal by selecting it from the drop down on the
+Terminal tab on the bottom panel as shown in the image below.
+
+<img alt="Git Bash" src="img/vscode_git_base.png" width=700>
+
+On the terminal, you will be able to perform all the 'make' commands explained
+above, except that you will have to replace all mentions of the 'make' binary
+with 'mingw32-make'.  'Ming32-make' is the MinGW emulation of 'make'.
+
+You can also click on the Debug extension on the left hand menu (the icon that
+looks like a play button with a bug attached) and then click on the green
+button that says 'Launch five_stage'.  That will launch a debug session that
+allows you to step through your code using the debug control panel (top left in
+the below image), set breakpoints (red dot in the below image), or observe
+variable values.
+
+<img alt="VSCode Debugging" src="img/vscode_debug.png" width=700>
+
+Please refer to the [VSCode Debugging tutorial](https://code.visualstudio.com/docs/editor/debugging) for details.
 
 ### For Mac
 
-Unfortunately, I gdb (and by extension ddd) does not run reliably on MacOS.
-It bas been a long standing problem but has still not been solved:
-https://sourceware.org/bugzilla/show_bug.cgi?id=24069
+To run VSCode on Mac, you will need to install the Clang compiler tool chain following instructions on this link:
+https://code.visualstudio.com/docs/cpp/config-clang-mac
 
-At least, you can still compile and test the program on your local machine.
-If you want to use gdb or ddd, you will have to do it remotely on
-linux.cs.pitt.edu.  At below are the steps to install the necessary packages.
-
-First you will have to install the XCode commandline developer tools, which
-includes gcc and g++:
+Essentially, you have to do on a terminal:
 ```
 xcode-select --install
 ```
 
-Then use Homebrew to install all required libraries:
+Then, we are going to use Homebrew to install some packages, so if you don't have it, please install it following instructions in this link: https://brew.sh/.
+
+Then use Homebrew to install the glib2 package:
 ```
 brew install glib
 ```
 
-In the Makefile, replace all mentions of "five_stage_solution" to
-"five_stage_solution.mac".  The five_stage_solution binary was compiled on
-linux.cs.pitt.edu (a Linux machine) which cannot run on a Mac.
-
-## Using DDD through remote X11 forwarding
-
-In order to use DDD on linux.cs.pitt.edu, since DDD is a GUI application,
-you need enable X11 forwarding in your SSH connection.
-
-### For Windows 10
-
-Enabling X11 forwarding on Windows 10 is a bit complicated since you have to do
-deal with Windows firewall.  Here is an easy to follow guide written by another
-Computer Architecture professor from the University of Illinois (which also
-happens to be my alma mater :).
-
-* If you have WSL1 installed: https://cs233.github.io/oyom_wsl1_setup.html
-* If you have WSL2 installed: https://cs233.github.io/oyom_wsl2_setup.html
-
-### For MacOS
-
-Enabling X11 forwarding on Mac systems is more straightforward.  All you have to do install XQuartz and launch it:
-
-* XQuartz download URL: https://www.xquartz.org/
-
-### For Linux
-
-For most Linux systems, X11 forwarding should be built-in with the X windows
-system, so no additional installations are needed.
-
-### Establishing SSH connection with X11 forwarding
-
-After enabling X11 forwarding, you have to specify X11 forwarding on your SSH
-connection.  When you connect to linux.cs.pitt.edu, use the following commandline:
-
+You will also need the pkg-config package:
 ```
-ssh -XC USERNAME@linux.cs.pitt.edu
+brew install pkg-config
 ```
 
-The -X option enables X11 forwarding and the -C option enables packet
-compression on your SSH connection so you can minimize the bandwidth consumed
-by X11 forwarding.
+After having done that, clone the project repository on to your laptop and then
+open the folder where you cloned it to using VSCode File > Open Folder menu.
+Then open a terminal through the Terminal > New Terminal menu.  Now you can
+perform all 'make' commands explained above on that terminal.
 
-If all goes well, after you log on to lnux.cs.pitt.edu, your $DISPLAY variable should be set up automatically.
-
-```
-$ echo $DISPLAY
-localhost:10.0
-```
-
-If your $DISPLAY is not set up, then that means that something went wrong.
-Either VcXsrv (for Windows) or XQuartz (for Mac) was not set up or something
-else.  Note that you should not force set $DISPLAY on your .bashrc file.  That
-is not going to achieve anything.  $DISPLAY should be automatically set by SSH.
-
-Once the above is confirmed, you can start using any GUI app on
-linux.cs.pitt.edu.  Now try launching DDD:
-
-```
-ddd
-```
-
-The DDD GUI should pop up on your machine momentarily.
-
-## DDD hang issue solution
-
-There is a long standing bug with DDD where it can hang indefinitely when
-launched for the second time.  It is because of some configuration settings
-that get auto-generated the first time it is launched.  The solution is to edit
-the ~/.ddd/init file to change the following line:
-
-```
-set extended-prompt not set\n\
-```
-
-To this line:
-
-```
-set extended-prompt (gdb) \n\
-```
-
-Reference: https://savannah.gnu.org/bugs/index.php
+You can also use the VSCode Debug extension to debug your code, in exactly the
+same way as described above for WIndows.
