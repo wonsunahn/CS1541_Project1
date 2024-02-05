@@ -7,7 +7,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <inttypes.h>
-#include <arpa/inet.h>
 #include "CPU.h" 
 #include "trace.h" 
 

@@ -1,5 +1,6 @@
 TARGETS = five_stage trace_reader trace_generator
 
+FIVE_STAGE_SOLUTION = ./five_stage_solution.exe
 SHORT_TRACES_DIR = /afs/cs.pitt.edu/courses/1541/short_traces
 GNUPLOT = /afs/cs.pitt.edu/courses/1541/gnuplot-5.2.8/bin/gnuplot
 
@@ -47,9 +48,9 @@ outputs/$(1:traces/%.tr=%).$(2:confs/%.conf=%).out: five_stage $(1) $(2)
 	@echo "Running ./five_stage -t $(1) -c $(2) -d > $$@"
 	-@./five_stage -t $(1) -c $(2) -d > $$@
 
-outputs_solution/$(1:traces/%.tr=%).$(2:confs/%.conf=%).out: five_stage_solution $(1) $(2)
-	@echo "Running ./five_stage_solution -t $(1) -c $(2) -d > $$@"
-	-@./five_stage_solution -t $(1) -c $(2) -d > $$@
+outputs_solution/$(1:traces/%.tr=%).$(2:confs/%.conf=%).out: $(FIVE_STAGE_SOLUTION) $(1) $(2)
+	@echo "Running $(FIVE_STAGE_SOLUTION) -t $(1) -c $(2) -d > $$@"
+	-@$(FIVE_STAGE_SOLUTION) -t $(1) -c $(2) -d > $$@
 endef
 
 $(foreach trace,$(TRACES),$(foreach conf, $(CONFS), $(eval $(call run_rules,$(trace),$(conf)))))

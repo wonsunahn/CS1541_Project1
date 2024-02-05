@@ -1,4 +1,9 @@
-
-*.un~
-*.swp
-*.md~
+*.o
+*.diff
+*.out
+five_stage.exe
+trace_reader.exe
+trace_generator.exe
+diffs/
+outputs/
+outputs_solution/
