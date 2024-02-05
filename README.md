@@ -807,7 +807,7 @@ open the folder where you cloned it to using VSCode File > Open Folder menu.
 Then open a 'Git Bash' terminal by selecting it from the drop down on the
 Terminal tab on the bottom panel as shown in the image below.
 
-<img alt="Git Bash" src="img/vscode_git_bash.png" width=700>
+<img alt="Git Bash" src="img/vscode_git_bash.png">
 
 On the terminal, you will be able to perform all the 'make' commands explained
 above, except that you will have to replace all mentions of the 'make' binary
@@ -820,7 +820,7 @@ allows you to step through your code using the debug control panel (top left in
 the below image), set breakpoints (red dot in the below image), or observe
 variable values.
 
-<img alt="VSCode Debugging" src="img/vscode_debug.png" width=700>
+<img alt="VSCode Debugging" src="img/vscode_debug.png">
 
 Please refer to the [VSCode Debugging tutorial](https://code.visualstudio.com/docs/editor/debugging) for details.
 
