@@ -3,7 +3,7 @@ TARGETS = five_stage trace_reader trace_generator
 ifeq ($(OS),Windows_NT)
 	FIVE_STAGE_SOLUTION = ./five_stage_solution.exe
 else
-UNAME_S := $(shell uname -s)
+    UNAME_S := $(shell uname -s)
     ifeq ($(UNAME_S),Linux)
         FIVE_STAGE_SOLUTION = ./five_stage_solution.linux
         CASAN = -fsanitize=address
